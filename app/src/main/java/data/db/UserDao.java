@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.comp2000restaurantapp.data.model.UserEntity;
+import data.model.UserEntity;
 
 import java.util.List;
 
