@@ -1,46 +1,50 @@
 package com.example.comp2000restaurantapp;
 
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.comp2000restaurantapp.data.api.ApiService;
+import com.example.comp2000restaurantapp.data.network.RetrofitClient;
 import com.example.comp2000restaurantapp.data.repository.UserRepository;
-import com.example.comp2000restaurantapp.data.api.RetrofitClient;
+
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Infrastructure objects (safe to create here for now)
-    private ApiService apiService;
-    private UserRepository userRepository;
+    private static final String TAG = "API_TEST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Window insets (default Android Studio template)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(
-                    systemBars.left,
-                    systemBars.top,
-                    systemBars.right,
-                    systemBars.bottom
-            );
-            return insets;
+        ApiService apiService = RetrofitClient.getApiService();
+        UserRepository userRepository =
+                new UserRepository(apiService, "student123");
+
+        // 🔹 Smoke test: create student database
+        userRepository.createStudentDatabase().enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call,
+                                   Response<Map<String, String>> response) {
+
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Database created: " + response.body());
+                } else {
+                    Log.e(TAG, "Error creating DB: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+                Log.e(TAG, "API failure", t);
+            }
         });
-
-        // ✅ Initialise Retrofit + Repository AFTER onCreate starts
-        apiService = RetrofitClient.getApiService();
-        userRepository = new UserRepository(apiService, "student123");
-
-        // 🚫 No API calls yet — this is intentional
-        // Stage 1.2 will add controlled test calls
     }
 }
