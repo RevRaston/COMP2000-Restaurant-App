@@ -1,35 +1,31 @@
-package data.api;
+package com.example.comp2000restaurantapp.data.api;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL =
-            "http://10.240.72.69/comp2000/coursework/";
+    // ⚠️ Replace this with the BASE URL from the API PDF
+    // Must end with a trailing slash
+    private static final String BASE_URL = "https://YOUR_API_BASE_URL_HERE/";
 
     private static Retrofit retrofit;
 
-    public static ApiService getApiService() {
+    // Private constructor = no accidental instantiation
+    private RetrofitClient() {}
+
+    public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
-
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-            OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(logging)
-                    .build();
-
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+        return retrofit;
+    }
 
-        return retrofit.create(ApiService.class);
+    public static ApiService getApiService() {
+        return getRetrofitInstance().create(ApiService.class);
     }
 }
 
