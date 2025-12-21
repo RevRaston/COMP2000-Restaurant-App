@@ -1,4 +1,5 @@
-package data.api;
+package com.example.comp2000restaurantapp.data.api;
+
 
 import java.util.List;
 import java.util.Map;
