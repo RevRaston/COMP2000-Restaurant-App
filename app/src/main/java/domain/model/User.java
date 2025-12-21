@@ -6,8 +6,8 @@ public class User {
     private String password;
     private String role;
 
-    // Required empty constructor for Gson
     public User() {
+        // Required empty constructor
     }
 
     public User(String username, String password, String role) {
@@ -40,4 +40,3 @@ public class User {
         this.role = role;
     }
 }
-

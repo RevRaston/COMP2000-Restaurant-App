@@ -47,6 +47,17 @@ public class UserRepository {
         return apiService.deleteUser(studentId, username);
     }
 
+    // Local DB helpers (used later)
+    public void saveUserLocally(UserEntity userEntity) {
+        // NOTE: Room does not allow main-thread DB access by default
+        // This is intentionally left for Stage 3 cleanup
+    }
+
+    public UserEntity getLocalUser(String username) {
+        return null; // wired later
+    }
+
+
     /* -------------------------
        MAPPING HELPERS
        ------------------------- */
