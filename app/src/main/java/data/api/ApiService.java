@@ -1,4 +1,5 @@
 package data.api;
 
-public class ApiService {
+public interface ApiService {
+    // API endpoints will be defined here
 }
