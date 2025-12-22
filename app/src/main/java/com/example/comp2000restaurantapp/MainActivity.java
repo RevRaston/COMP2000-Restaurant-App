@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.comp2000restaurantapp.data.api.ApiService;
 import com.example.comp2000restaurantapp.data.network.RetrofitClient;
 import com.example.comp2000restaurantapp.data.repository.UserRepository;
+import com.example.comp2000restaurantapp.domain.auth.AuthManager;
+import com.example.comp2000restaurantapp.domain.model.User;
 
 import java.util.Map;
 
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialise API + Repository
+        // 🔹 Initialise API + Repository
         ApiService apiService = RetrofitClient.getApiService();
         UserRepository userRepository =
                 new UserRepository(apiService, "student123");
@@ -48,5 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "API call failed", t);
             }
         });
+
+        // 🔹 AuthManager test (Stage 2 foundation)
+        User testUser = new User("admin", "password", "staff");
+        AuthManager.login(testUser);
+
+        Log.d(TAG, "Is logged in: " + AuthManager.isLoggedIn());
+        Log.d(TAG, "Is staff: " + AuthManager.isStaff());
     }
 }
