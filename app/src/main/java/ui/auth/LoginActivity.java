@@ -17,19 +17,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // 🔐 TEMP login for Stage 2 (UI later)
-        // GUEST test
-        User user = new User("admin", "password", "staff");
-        AuthManager.login(user);
-
-
-        if (AuthManager.isStaff()) {
-            startActivity(new Intent(this, StaffHomeActivity.class));
-        } else {
+        findViewById(R.id.btnLoginGuest).setOnClickListener(v -> {
+            AuthManager.login(new User("guest", "", "guest"));
             startActivity(new Intent(this, GuestHomeActivity.class));
-        }
+            finish();
+        });
 
-        finish();
+        findViewById(R.id.btnLoginStaff).setOnClickListener(v -> {
+            AuthManager.login(new User("admin", "password", "staff"));
+            startActivity(new Intent(this, StaffHomeActivity.class));
+            finish();
+        });
     }
 }
-

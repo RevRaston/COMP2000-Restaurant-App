@@ -1,13 +1,13 @@
 package com.example.comp2000restaurantapp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comp2000restaurantapp.R;
 import com.example.comp2000restaurantapp.domain.auth.AuthManager;
-
-import com.example.comp2000restaurantapp.domain.notifications.NotificationHelper;
+import com.example.comp2000restaurantapp.ui.auth.LoginActivity;
+import com.example.comp2000restaurantapp.ui.settings.SettingsActivity;
 
 public class GuestHomeActivity extends AppCompatActivity {
 
@@ -15,20 +15,20 @@ public class GuestHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 🔒 Guard: must be logged in
         if (!AuthManager.isLoggedIn()) {
             finish();
             return;
         }
-        NotificationHelper.showNotification(
-                this,
-                "Welcome",
-                "Browse the menu and make a reservation"
-        );
-
 
         setContentView(R.layout.activity_guest_home);
+
+        findViewById(R.id.btnSettings).setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class)));
+
+        findViewById(R.id.btnLogout).setOnClickListener(v -> {
+            AuthManager.logout();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        });
     }
 }
-
-
