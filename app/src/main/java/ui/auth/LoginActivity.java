@@ -14,3 +14,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 }
+
+AuthManager.login(user);
+
+if (AuthManager.isStaff()) {
+startActivity(new Intent(this, StaffHomeActivity.class));
+        } else {
+startActivity(new Intent(this, GuestHomeActivity.class));
+        }
+
+finish();
