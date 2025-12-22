@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialise API + Repository
         ApiService apiService = RetrofitClient.getApiService();
         UserRepository userRepository =
                 new UserRepository(apiService, "student123");
@@ -31,19 +32,20 @@ public class MainActivity extends AppCompatActivity {
         // 🔹 Smoke test: create student database
         userRepository.createStudentDatabase().enqueue(new Callback<Map<String, String>>() {
             @Override
-            public void onResponse(Call<Map<String, String>> call,
-                                   Response<Map<String, String>> response) {
-
-                if (response.isSuccessful()) {
+            public void onResponse(
+                    Call<Map<String, String>> call,
+                    Response<Map<String, String>> response
+            ) {
+                if (response.isSuccessful() && response.body() != null) {
                     Log.d(TAG, "Database created: " + response.body());
                 } else {
-                    Log.e(TAG, "Error creating DB: " + response.code());
+                    Log.e(TAG, "Create DB failed. Code: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Map<String, String>> call, Throwable t) {
-                Log.e(TAG, "API failure", t);
+                Log.e(TAG, "API call failed", t);
             }
         });
     }

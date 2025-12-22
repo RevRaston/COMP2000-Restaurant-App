@@ -1,7 +1,10 @@
 package com.example.comp2000restaurantapp.data.repository;
 
+
 import com.example.comp2000restaurantapp.data.api.ApiService;
 import com.example.comp2000restaurantapp.domain.model.User;
+import com.example.comp2000restaurantapp.data.model.UserEntity;
+
 
 import java.util.HashMap;
 import java.util.List;

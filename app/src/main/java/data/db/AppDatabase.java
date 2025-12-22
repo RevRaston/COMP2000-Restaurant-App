@@ -1,4 +1,4 @@
-package com.example.comp2000restaurantapp.data.db;
+package data.db;
 
 import android.content.Context;
 
@@ -6,7 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import data.model.UserEntity;
+import com.example.comp2000restaurantapp.data.model.UserEntity;
+
 
 @Database(
         entities = {UserEntity.class},
@@ -24,11 +25,10 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
-                                    context.getApplicationContext(),
-                                    AppDatabase.class,
-                                    "restaurant_app_db"
-                            ).fallbackToDestructiveMigration()
-                            .build();
+                            context.getApplicationContext(),
+                            AppDatabase.class,
+                            "app_database"
+                    ).build();
                 }
             }
         }

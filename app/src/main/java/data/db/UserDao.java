@@ -1,13 +1,13 @@
-package com.example.comp2000restaurantapp.data.db;
+package data.db;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import data.model.UserEntity;
-
 import java.util.List;
+
+import com.example.comp2000restaurantapp.data.model.UserEntity;
 
 @Dao
 public interface UserDao {
@@ -16,7 +16,7 @@ public interface UserDao {
     void insertUser(UserEntity user);
 
     @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
-    UserEntity getUser(String username);
+    UserEntity getUserByUsername(String username);
 
     @Query("SELECT * FROM users")
     List<UserEntity> getAllUsers();
@@ -25,5 +25,5 @@ public interface UserDao {
     void deleteUser(String username);
 
     @Query("DELETE FROM users")
-    void deleteAllUsers();
+    void clearUsers();
 }
