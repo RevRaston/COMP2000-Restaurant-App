@@ -26,12 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 🔹 Initialise API + Repository
+        // ---------------------------
+        // API + Repository smoke test
+        // ---------------------------
         ApiService apiService = RetrofitClient.getApiService();
         UserRepository userRepository =
                 new UserRepository(apiService, "student123");
 
-        // 🔹 Smoke test: create student database
         userRepository.createStudentDatabase().enqueue(new Callback<Map<String, String>>() {
             @Override
             public void onResponse(
@@ -51,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 🔹 AuthManager test (Stage 2 foundation)
+        // ---------------------------
+        // AuthManager smoke test
+        // ---------------------------
         User testUser = new User("admin", "password", "staff");
         AuthManager.login(testUser);
 
