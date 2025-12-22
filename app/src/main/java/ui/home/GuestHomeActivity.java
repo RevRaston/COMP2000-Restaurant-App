@@ -1,4 +1,4 @@
-package ui.home;
+package com.example.comp2000restaurantapp.ui.home;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

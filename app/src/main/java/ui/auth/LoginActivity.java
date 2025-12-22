@@ -1,16 +1,14 @@
-package ui.auth;
+package com.example.comp2000restaurantapp.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comp2000restaurantapp.R;
 import com.example.comp2000restaurantapp.domain.auth.AuthManager;
 import com.example.comp2000restaurantapp.domain.model.User;
-
-import ui.guest.GuestHomeActivity;
-import ui.staff.StaffHomeActivity;
+import com.example.comp2000restaurantapp.ui.home.GuestHomeActivity;
+import com.example.comp2000restaurantapp.ui.home.StaffHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // TEMP login (Stage 2 — no UI yet)
+        // TEMP login for Stage 2
         User user = new User("admin", "password", "staff");
         AuthManager.login(user);
 
@@ -32,4 +30,3 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 }
-
