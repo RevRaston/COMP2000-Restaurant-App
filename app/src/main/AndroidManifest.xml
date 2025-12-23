@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP2000RestaurantApp">
 
-        <!-- ENTRY POINT -->
+        <!-- 🚀 ENTRY POINT -->
         <activity
             android:name="com.example.comp2000restaurantapp.ui.auth.LoginActivity"
             android:exported="true">
@@ -19,17 +19,43 @@
             </intent-filter>
         </activity>
 
+        <!-- 🔐 AUTH -->
         <activity
-            android:name="com.example.comp2000restaurantapp.ui.home.StaffHomeActivity" />
-
+            android:name="com.example.comp2000restaurantapp.ui.auth.RegisterActivity"/>
         <activity
-            android:name="com.example.comp2000restaurantapp.ui.home.GuestHomeActivity" />
+            android:name="com.example.comp2000restaurantapp.ui.auth.ForgotPasswordActivity"/>
 
+        <!-- 🏠 HOME -->
         <activity
-            android:name="com.example.comp2000restaurantapp.MainActivity" />
+            android:name="com.example.comp2000restaurantapp.ui.home.HomeActivity"/>
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.home.GuestHomeActivity"/>
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.home.StaffHomeActivity"/>
 
-        <activity android:name="ui.settings.SettingsActivity"/>
+        <!-- 🍽 MENU -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.guest.MenuActivity"/>
+
+        <!-- 📅 RESERVATIONS -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.guest.ReservationActivity"/>
+
+        <!-- 👤 ACCOUNT / SETTINGS -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.user.AccountActivity"/>
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.settings.SettingsActivity"/>
+
+        <!-- 🧑‍💼 STAFF -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.staff.StaffDashboardActivity"/>
+
+        <!-- Legacy / Not launched -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.MainActivity"/>
 
     </application>
 
 </manifest>
+

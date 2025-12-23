@@ -1,4 +1,4 @@
-package ui.guest;
+package ui.menu;
 
 public class MenuActivity {
 }

@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.comp2000restaurantapp.R;
 import com.example.comp2000restaurantapp.domain.auth.AuthManager;
 import com.example.comp2000restaurantapp.ui.auth.LoginActivity;
+import com.example.comp2000restaurantapp.ui.menu.MenuActivity;
+import com.example.comp2000restaurantapp.ui.reservation.ReservationActivity;
 import com.example.comp2000restaurantapp.ui.settings.SettingsActivity;
+import com.example.comp2000restaurantapp.ui.staff.StaffDashboardActivity;
 
 public class StaffHomeActivity extends AppCompatActivity {
 
@@ -22,13 +25,27 @@ public class StaffHomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_staff_home);
 
-        findViewById(R.id.btnSettings).setOnClickListener(v ->
-                startActivity(new Intent(this, SettingsActivity.class)));
+        findViewById(R.id.btnDashboard)
+                .setOnClickListener(v ->
+                        startActivity(new Intent(this, StaffDashboardActivity.class)));
 
-        findViewById(R.id.btnLogout).setOnClickListener(v -> {
-            AuthManager.logout();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        });
+        findViewById(R.id.btnMenu)
+                .setOnClickListener(v ->
+                        startActivity(new Intent(this, MenuActivity.class)));
+
+        findViewById(R.id.btnReservations)
+                .setOnClickListener(v ->
+                        startActivity(new Intent(this, ReservationActivity.class)));
+
+        findViewById(R.id.btnSettings)
+                .setOnClickListener(v ->
+                        startActivity(new Intent(this, SettingsActivity.class)));
+
+        findViewById(R.id.btnLogout)
+                .setOnClickListener(v -> {
+                    AuthManager.logout();
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                });
     }
 }

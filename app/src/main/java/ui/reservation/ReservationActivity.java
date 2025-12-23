@@ -1,4 +1,4 @@
-package ui.guest;
+package ui.reservation;
 
 public class ReservationActivity {
 }

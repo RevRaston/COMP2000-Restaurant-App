@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="24dp">
 
     <TextView
-        android:text="Staff Home"
-        android:textSize="22sp"
+        android:text="STAFF HOME"
+        android:textSize="24sp"
         android:layout_marginBottom="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button android:text="Manage Menu"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnDashboard"
+        android:text="Dashboard"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button android:text="View Reservations"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"/>
+    <Button
+        android:id="@+id/btnMenu"
+        android:text="Manage Menu"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    <Button android:id="@+id/btnSettings"
+    <Button
+        android:id="@+id/btnReservations"
+        android:text="View Reservations"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnSettings"
         android:text="Settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    <Button android:id="@+id/btnLogout"
+    <Button
+        android:id="@+id/btnLogout"
         android:text="Logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
