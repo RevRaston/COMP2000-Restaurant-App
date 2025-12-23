@@ -9,11 +9,10 @@
     <item
         android:id="@+id/nav_account"
         android:title="Account"
-        android:icon="@android:drawable/ic_menu_myplaces"/>
+        android:icon="@android:drawable/ic_menu_manage"/>
 
     <item
         android:id="@+id/nav_logout"
         android:title="Logout"
         android:icon="@android:drawable/ic_lock_power_off"/>
-
 </menu>
