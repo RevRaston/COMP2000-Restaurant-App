@@ -35,11 +35,11 @@
 
         <!-- 🍽 MENU -->
         <activity
-            android:name="com.example.comp2000restaurantapp.ui.guest.MenuActivity"/>
+            android:name="com.example.comp2000restaurantapp.ui.menu.MenuActivity"/>
 
         <!-- 📅 RESERVATIONS -->
         <activity
-            android:name="com.example.comp2000restaurantapp.ui.guest.ReservationActivity"/>
+            android:name="com.example.comp2000restaurantapp.ui.reservation.ReservationActivity"/>
 
         <!-- 👤 ACCOUNT / SETTINGS -->
         <activity
@@ -58,4 +58,3 @@
     </application>
 
 </manifest>
-
