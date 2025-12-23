@@ -16,31 +16,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:title="Menu"
-            android:background="?attr/colorPrimary" />
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size"
+            style="@style/AppToolbar"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/purple_secondary"
+            app:tabSelectedTextColor="@color/purple_primary"/>
 
         <ScrollView
             android:id="@+id/scrollMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="16dp">
 
             <LinearLayout
                 android:id="@+id/menuContainer"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
         </ScrollView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBookNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book a Table" />
+            android:text="Book a Table"
+            android:layout_margin="16dp"/>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -48,7 +54,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        android:background="@android:color/white"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/drawer_header"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>
