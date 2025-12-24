@@ -1,8 +1,13 @@
 package com.example.comp2000restaurantapp.ui.staff;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.comp2000restaurantapp.R;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 
 public class StaffDashboardActivity extends AppCompatActivity {
 
@@ -11,6 +16,13 @@ public class StaffDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_dashboard);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        MaterialButton btnManageReservations = findViewById(R.id.btnManageReservations);
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+        btnManageReservations.setOnClickListener(v ->
+                startActivity(new Intent(this, StaffReservationsActivity.class))
+        );
     }
 }
