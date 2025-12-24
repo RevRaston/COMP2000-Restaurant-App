@@ -1,6 +1,7 @@
 package com.example.comp2000restaurantapp.ui.staff;
 
 import android.app.AlertDialog;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -62,6 +63,7 @@ public class StaffReservationsActivity extends AppCompatActivity {
 
             TextView tvTitle = card.findViewById(R.id.tvTitle);
             TextView tvSubtitle = card.findViewById(R.id.tvSubtitle);
+            TextView badge = card.findViewById(R.id.tvCompletedBadge);
 
             tvTitle.setText(
                     r.getGuestName() + " – " + r.getTime() +
@@ -70,8 +72,11 @@ public class StaffReservationsActivity extends AppCompatActivity {
             tvSubtitle.setText("Date: " + r.getDate());
 
             if (r.isCompleted()) {
+                // Strike-through + fade
+                tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 tvTitle.setAlpha(0.4f);
                 tvSubtitle.setAlpha(0.4f);
+                badge.setVisibility(View.VISIBLE);
             }
 
             card.findViewById(R.id.btnComplete).setOnClickListener(v -> {

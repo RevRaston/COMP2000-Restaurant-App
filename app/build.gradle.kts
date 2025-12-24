@@ -1,5 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
+
+    // ✅ Apply Firebase plugin (NO version here)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,27 +43,21 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    // =========================
-    // Retrofit (API)
-    // =========================
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // Optional but good for debugging & marks
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-    // =========================
-    // Room (Local database)
-    // =========================
+    // Room
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
-
-    // (Safe to include even if unused for now)
     implementation("androidx.room:room-ktx:2.6.1")
 
-    // =========================
+    // ✅ Firebase Firestore
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation("com.google.firebase:firebase-firestore")
+
     // Testing
-    // =========================
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
