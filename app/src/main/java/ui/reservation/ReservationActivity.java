@@ -139,8 +139,10 @@ public class ReservationActivity extends AppCompatActivity {
                 date,
                 time,
                 partySize,
-                notes
+                notes,
+                false   // 👈 NEW: not completed yet
         );
+
 
         ReservationStore.saveReservation(this, reservation);
 

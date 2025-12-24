@@ -16,7 +16,6 @@ import com.google.android.material.appbar.MaterialToolbar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,10 +67,8 @@ public class StaffReservationsActivity extends AppCompatActivity {
                     r.getGuestName() + " – " + r.getTime() +
                             " (" + r.getPartySize() + ")"
             );
-
             tvSubtitle.setText("Date: " + r.getDate());
 
-            // Completed styling
             if (r.isCompleted()) {
                 tvTitle.setAlpha(0.4f);
                 tvSubtitle.setAlpha(0.4f);

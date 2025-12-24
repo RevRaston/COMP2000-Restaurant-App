@@ -22,6 +22,16 @@ public class ReservationStore {
 
     public static void saveReservation(Context context, Reservation reservation) {
         List<Reservation> existing = getReservations(context);
+
+        // Remove old copy if exists
+        Iterator<Reservation> it = existing.iterator();
+        while (it.hasNext()) {
+            if (it.next().getId() == reservation.getId()) {
+                it.remove();
+                break;
+            }
+        }
+
         existing.add(reservation);
         persist(context, existing);
     }
@@ -36,14 +46,15 @@ public class ReservationStore {
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
 
-                long id = obj.optLong("id", System.currentTimeMillis());
-                String guestName = obj.optString("guestName", "Guest");
-                String date = obj.optString("date", "");
-                String time = obj.optString("time", "");
-                int partySize = obj.optInt("partySize", 1);
-                String notes = obj.optString("notes", "");
-
-                result.add(new Reservation(id, guestName, date, time, partySize, notes));
+                result.add(new Reservation(
+                        obj.optLong("id"),
+                        obj.optString("guestName"),
+                        obj.optString("date"),
+                        obj.optString("time"),
+                        obj.optInt("partySize"),
+                        obj.optString("notes"),
+                        obj.optBoolean("completed", false)
+                ));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -55,18 +66,15 @@ public class ReservationStore {
     public static void deleteReservation(Context context, long id) {
         List<Reservation> existing = getReservations(context);
         Iterator<Reservation> it = existing.iterator();
+
         while (it.hasNext()) {
-            Reservation r = it.next();
-            if (r.getId() == id) {
+            if (it.next().getId() == id) {
                 it.remove();
                 break;
             }
         }
-        persist(context, existing);
-    }
 
-    public static void clearAll(Context context) {
-        persist(context, new ArrayList<>());
+        persist(context, existing);
     }
 
     private static void persist(Context context, List<Reservation> reservations) {
@@ -81,6 +89,7 @@ public class ReservationStore {
                 obj.put("time", r.getTime());
                 obj.put("partySize", r.getPartySize());
                 obj.put("notes", r.getNotes());
+                obj.put("completed", r.isCompleted());
                 arr.put(obj);
             }
         } catch (JSONException e) {
