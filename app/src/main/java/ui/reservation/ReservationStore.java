@@ -23,16 +23,20 @@ public class ReservationStore {
     public static void saveReservation(Context context, Reservation reservation) {
         List<Reservation> existing = getReservations(context);
 
-        // Remove old copy if exists
-        Iterator<Reservation> it = existing.iterator();
-        while (it.hasNext()) {
-            if (it.next().getId() == reservation.getId()) {
-                it.remove();
+        // replace if exists
+        boolean replaced = false;
+        for (int i = 0; i < existing.size(); i++) {
+            if (existing.get(i).getId() == reservation.getId()) {
+                existing.set(i, reservation);
+                replaced = true;
                 break;
             }
         }
 
-        existing.add(reservation);
+        if (!replaced) {
+            existing.add(reservation);
+        }
+
         persist(context, existing);
     }
 

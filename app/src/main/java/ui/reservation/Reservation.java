@@ -10,15 +10,14 @@ public class Reservation {
     private final String notes;
     private boolean completed;
 
-    public Reservation(
-            long id,
-            String guestName,
-            String date,
-            String time,
-            int partySize,
-            String notes,
-            boolean completed
-    ) {
+    public Reservation(long id,
+                       String guestName,
+                       String date,
+                       String time,
+                       int partySize,
+                       String notes,
+                       boolean completed) {
+
         this.id = id;
         this.guestName = guestName;
         this.date = date;
