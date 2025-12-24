@@ -59,6 +59,15 @@
             android:name="com.example.comp2000restaurantapp.ui.menu.StaffMenuEditorActivity"
             android:exported="false" />
 
+        <!-- Guest reservations list -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.reservation.ReservationListActivity" />
+
+        <!-- Staff reservations management -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.staff.StaffReservationsActivity" />
+
+
     </application>
 
 </manifest>

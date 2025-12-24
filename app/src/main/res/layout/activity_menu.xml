@@ -6,72 +6,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <!-- MAIN CONTENT -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <!-- TOP APP BAR -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:title="Menu"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size"
+            app:elevation="4dp" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
+        <!-- CATEGORY TABS -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/purple_secondary"
+            app:tabSelectedTextColor="@color/purple_primary" />
+
+        <!-- CONTENT -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- LOADING STATE -->
+            <LinearLayout
+                android:id="@+id/loadingContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:title="Menu"
-                app:navigationIcon="@android:drawable/ic_menu_sort_by_size"
-                style="@style/AppToolbar"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading menu..."
+                    android:layout_marginTop="12dp" />
+            </LinearLayout>
+
+            <!-- EMPTY STATE -->
+            <TextView
+                android:id="@+id/emptyStateText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/purple_secondary"
-                app:tabSelectedTextColor="@color/purple_primary"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="No menu items available"
+                android:visibility="gone" />
 
+            <!-- MENU LIST -->
             <ScrollView
                 android:id="@+id/scrollMenu"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:padding="16dp">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/menuContainer"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp" />
             </ScrollView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBookNow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Book a Table"
-                android:layout_margin="16dp"/>
-        </LinearLayout>
+        </FrameLayout>
 
-        <!-- STAFF FAB -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddItem"
-            android:layout_width="wrap_content"
+        <!-- BOOK BUTTON -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBookNow"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="24dp"
-            android:contentDescription="Add menu item"
-            android:src="@android:drawable/ic_input_add"
-            android:visibility="gone"
-            app:backgroundTint="@color/purple_primary"/>
+            android:text="Book a Table"
+            android:layout_margin="16dp" />
 
-    </FrameLayout>
+    </LinearLayout>
 
+    <!-- NAV DRAWER -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu"
-        app:headerLayout="@layout/drawer_header"/>
+        app:headerLayout="@layout/drawer_header" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
