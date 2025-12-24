@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635134744538",
+    "project_id": "comp2000restaurantapp",
+    "storage_bucket": "comp2000restaurantapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635134744538:android:941d7df6125ee48b8612e3",
+        "android_client_info": {
+          "package_name": "com.example.comp2000restaurantapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVPsFpyhkIhEIKXoPfRsdJ2kY6Y0na7HA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
