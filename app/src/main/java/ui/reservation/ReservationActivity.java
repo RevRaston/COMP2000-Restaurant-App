@@ -58,9 +58,7 @@ public class ReservationActivity extends AppCompatActivity {
                 today.get(Calendar.DAY_OF_MONTH)
         );
 
-        // Prevent past dates
         dialog.getDatePicker().setMinDate(today.getTimeInMillis());
-
         dialog.show();
     }
 
@@ -88,42 +86,14 @@ public class ReservationActivity extends AppCompatActivity {
         String partyStr = etPartySize.getText().toString().trim();
         String notes = etNotes.getText().toString().trim();
 
-        if (TextUtils.isEmpty(date)) {
-            etDate.setError("Please choose a date");
-            etDate.requestFocus();
+        if (TextUtils.isEmpty(date) || TextUtils.isEmpty(time) || TextUtils.isEmpty(partyStr)) {
+            Toast.makeText(this, "Please complete all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (TextUtils.isEmpty(time)) {
-            etTime.setError("Please choose a time");
-            etTime.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(partyStr)) {
-            etPartySize.setError("Enter party size");
-            etPartySize.requestFocus();
-            return;
-        }
-
-        int partySize;
-        try {
-            partySize = Integer.parseInt(partyStr);
-        } catch (NumberFormatException e) {
-            etPartySize.setError("Invalid number");
-            etPartySize.requestFocus();
-            return;
-        }
-
-        if (partySize <= 0) {
-            etPartySize.setError("Party size must be at least 1");
-            etPartySize.requestFocus();
-            return;
-        }
-
-        if (partySize > 12) { // arbitrary cap
-            etPartySize.setError("Please call for groups over 12");
-            etPartySize.requestFocus();
+        int partySize = Integer.parseInt(partyStr);
+        if (partySize <= 0 || partySize > 12) {
+            etPartySize.setError("Party size must be between 1 and 12");
             return;
         }
 
@@ -131,24 +101,18 @@ public class ReservationActivity extends AppCompatActivity {
             name = "Guest";
         }
 
-        long id = System.currentTimeMillis();
-
         Reservation reservation = new Reservation(
-                id,
+                System.currentTimeMillis(),
                 name,
                 date,
                 time,
                 partySize,
                 notes,
-                false   // 👈 NEW: not completed yet
+                false
         );
 
-
         ReservationStore.saveReservation(this, reservation);
-
         Toast.makeText(this, "Reservation saved!", Toast.LENGTH_SHORT).show();
-
-        // For now, just close and go back
         finish();
     }
 }

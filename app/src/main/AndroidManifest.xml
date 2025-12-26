@@ -62,7 +62,7 @@
 
         <!-- Guest reservations list -->
         <activity
-            android:name="com.example.comp2000restaurantapp.ui.reservation.ReservationListActivity" />
+            android:name="com.example.comp2000restaurantapp.domain.reservation.ReservationListActivity" />
 
         <!-- Staff reservations management -->
         <activity

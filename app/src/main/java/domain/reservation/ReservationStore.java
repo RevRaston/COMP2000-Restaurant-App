@@ -23,7 +23,6 @@ public class ReservationStore {
     public static void saveReservation(Context context, Reservation reservation) {
         List<Reservation> existing = getReservations(context);
 
-        // replace if exists
         boolean replaced = false;
         for (int i = 0; i < existing.size(); i++) {
             if (existing.get(i).getId() == reservation.getId()) {
@@ -100,8 +99,7 @@ public class ReservationStore {
             e.printStackTrace();
         }
 
-        getPrefs(context)
-                .edit()
+        getPrefs(context).edit()
                 .putString(KEY_RESERVATIONS, arr.toString())
                 .apply();
     }

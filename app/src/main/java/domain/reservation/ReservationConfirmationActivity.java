@@ -1,4 +1,4 @@
-package com.example.comp2000restaurantapp.ui.reservation;
+package domain.reservation;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.example.comp2000restaurantapp.ui.reservation;
+package domain.reservation;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comp2000restaurantapp.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.example.comp2000restaurantapp.domain.reservation.Reservation;
 import com.example.comp2000restaurantapp.domain.reservation.ReservationStore;
-import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.List;
 import java.util.Locale;

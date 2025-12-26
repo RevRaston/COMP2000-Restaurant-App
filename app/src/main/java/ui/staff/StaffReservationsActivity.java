@@ -11,18 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comp2000restaurantapp.R;
 import com.example.comp2000restaurantapp.domain.reservation.Reservation;
-import com.example.comp2000restaurantapp.domain.reservation.ReservationStore;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 
 public class StaffReservationsActivity extends AppCompatActivity {
 
     private LinearLayout container;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,91 +29,95 @@ public class StaffReservationsActivity extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
         container = findViewById(R.id.reservationContainer);
+        db = FirebaseFirestore.getInstance();
 
         toolbar.setNavigationOnClickListener(v -> finish());
+
+        startLiveUpdates();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadReservations();
+    private void startLiveUpdates() {
+        db.collection("reservations")
+                .addSnapshotListener((snapshots, e) -> {
+                    if (snapshots == null) return;
+
+                    container.removeAllViews();
+
+                    if (snapshots.isEmpty()) {
+                        TextView empty = new TextView(this);
+                        empty.setText("No reservations found.");
+                        empty.setPadding(0, 32, 0, 0);
+                        container.addView(empty);
+                        return;
+                    }
+
+                    for (DocumentSnapshot doc : snapshots) {
+
+                        Reservation r = new Reservation(
+                                Long.parseLong(doc.getId()),
+                                doc.getString("guestName"),
+                                doc.getString("date"),
+                                doc.getString("time"),
+                                doc.getLong("partySize").intValue(),
+                                doc.getString("notes"),
+                                Boolean.TRUE.equals(doc.getBoolean("completed"))
+                        );
+
+                        View card = getLayoutInflater()
+                                .inflate(R.layout.item_staff_reservation, container, false);
+
+                        TextView tvTitle = card.findViewById(R.id.tvTitle);
+                        TextView tvSubtitle = card.findViewById(R.id.tvSubtitle);
+                        TextView badge = card.findViewById(R.id.tvCompletedBadge);
+
+                        tvTitle.setText(
+                                String.format(
+                                        Locale.UK,
+                                        "%s – %s (%d)",
+                                        r.getGuestName(),
+                                        r.getTime(),
+                                        r.getPartySize()
+                                )
+                        );
+
+                        tvSubtitle.setText("Date: " + r.getDate());
+
+                        if (r.isCompleted()) {
+                            tvTitle.setPaintFlags(
+                                    tvTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
+                            );
+                            tvTitle.setAlpha(0.4f);
+                            tvSubtitle.setAlpha(0.4f);
+                            badge.setVisibility(View.VISIBLE);
+                        }
+
+                        card.findViewById(R.id.btnComplete)
+                                .setOnClickListener(v ->
+                                        db.collection("reservations")
+                                                .document(doc.getId())
+                                                .update("completed", true)
+                                );
+
+                        card.findViewById(R.id.btnDelete)
+                                .setOnClickListener(v ->
+                                        confirmDelete(doc.getId())
+                                );
+
+                        container.addView(card);
+                    }
+                });
     }
 
-    private void loadReservations() {
-        container.removeAllViews();
-
-        List<Reservation> reservations =
-                ReservationStore.getReservations(this);
-
-        sortReservations(reservations);
-
-        if (reservations.isEmpty()) {
-            TextView empty = new TextView(this);
-            empty.setText("No reservations found.");
-            empty.setPadding(0, 32, 0, 0);
-            container.addView(empty);
-            return;
-        }
-
-        for (Reservation r : reservations) {
-            View card = getLayoutInflater()
-                    .inflate(R.layout.item_staff_reservation, container, false);
-
-            TextView tvTitle = card.findViewById(R.id.tvTitle);
-            TextView tvSubtitle = card.findViewById(R.id.tvSubtitle);
-            TextView badge = card.findViewById(R.id.tvCompletedBadge);
-
-            tvTitle.setText(
-                    r.getGuestName() + " – " + r.getTime() +
-                            " (" + r.getPartySize() + ")"
-            );
-            tvSubtitle.setText("Date: " + r.getDate());
-
-            if (r.isCompleted()) {
-                // Strike-through + fade
-                tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                tvTitle.setAlpha(0.4f);
-                tvSubtitle.setAlpha(0.4f);
-                badge.setVisibility(View.VISIBLE);
-            }
-
-            card.findViewById(R.id.btnComplete).setOnClickListener(v -> {
-                r.setCompleted(true);
-                ReservationStore.saveReservation(this, r);
-                loadReservations();
-            });
-
-            card.findViewById(R.id.btnDelete).setOnClickListener(v ->
-                    confirmDelete(r.getId())
-            );
-
-            container.addView(card);
-        }
-    }
-
-    private void confirmDelete(long id) {
+    private void confirmDelete(String docId) {
         new AlertDialog.Builder(this)
                 .setTitle("Delete reservation")
                 .setMessage("Are you sure you want to delete this reservation?")
-                .setPositiveButton("Delete", (d, w) -> {
-                    ReservationStore.deleteReservation(this, id);
-                    loadReservations();
-                })
+                .setPositiveButton("Delete", (d, w) ->
+                        db.collection("reservations")
+                                .document(docId)
+                                .delete()
+                )
                 .setNegativeButton("Cancel", null)
                 .show();
-    }
-
-    private void sortReservations(List<Reservation> list) {
-        SimpleDateFormat df =
-                new SimpleDateFormat("d/M/yyyy HH:mm", Locale.UK);
-
-        Collections.sort(list, (a, b) -> {
-            try {
-                return df.parse(a.getDate() + " " + a.getTime())
-                        .compareTo(df.parse(b.getDate() + " " + b.getTime()));
-            } catch (ParseException e) {
-                return 0;
-            }
-        });
     }
 }

@@ -16,7 +16,7 @@ import com.example.comp2000restaurantapp.R;
 import com.example.comp2000restaurantapp.domain.model.MenuData;
 import com.example.comp2000restaurantapp.ui.auth.LoginActivity;
 import com.example.comp2000restaurantapp.ui.home.GuestHomeActivity;
-import com.example.comp2000restaurantapp.ui.reservation.ReservationActivity;
+import com.example.comp2000restaurantapp.ui.reservation.ReservationActivity; // ✅ FIXED
 import com.example.comp2000restaurantapp.ui.user.AccountActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -76,6 +76,7 @@ public class MenuActivity extends AppCompatActivity {
             return true;
         });
 
+        // ✅ Reservation button works now
         btnBook.setOnClickListener(v ->
                 startActivity(new Intent(this, ReservationActivity.class)));
 

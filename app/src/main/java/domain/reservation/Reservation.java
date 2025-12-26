@@ -28,33 +28,13 @@ public class Reservation {
         this.completed = completed;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getGuestName() {
-        return guestName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public int getPartySize() {
-        return partySize;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
+    public long getId() { return id; }
+    public String getGuestName() { return guestName; }
+    public String getDate() { return date; }
+    public String getTime() { return time; }
+    public int getPartySize() { return partySize; }
+    public String getNotes() { return notes; }
+    public boolean isCompleted() { return completed; }
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
