@@ -15,7 +15,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class StaffReservationsActivity extends AppCompatActivity {
 
@@ -32,6 +34,16 @@ public class StaffReservationsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         toolbar.setNavigationOnClickListener(v -> finish());
+
+        // ✅ Staff action menu
+        toolbar.inflateMenu(R.menu.menu_staff_reservations);
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_add_reservation) {
+                showAddReservationDialog();
+                return true;
+            }
+            return false;
+        });
 
         startLiveUpdates();
     }
@@ -53,15 +65,22 @@ public class StaffReservationsActivity extends AppCompatActivity {
 
                     for (DocumentSnapshot doc : snapshots) {
 
+                        Long rid = doc.getLong("reservationId");
+                        long safeId = (rid != null) ? rid : 0L;
+
                         Reservation r = new Reservation(
-                                Long.parseLong(doc.getId()),
+                                safeId,
                                 doc.getString("guestName"),
                                 doc.getString("date"),
                                 doc.getString("time"),
-                                doc.getLong("partySize").intValue(),
+                                doc.getLong("partySize") != null
+                                        ? doc.getLong("partySize").intValue()
+                                        : 0,
                                 doc.getString("notes"),
                                 Boolean.TRUE.equals(doc.getBoolean("completed"))
                         );
+
+
 
                         View card = getLayoutInflater()
                                 .inflate(R.layout.item_staff_reservation, container, false);
@@ -70,15 +89,13 @@ public class StaffReservationsActivity extends AppCompatActivity {
                         TextView tvSubtitle = card.findViewById(R.id.tvSubtitle);
                         TextView badge = card.findViewById(R.id.tvCompletedBadge);
 
-                        tvTitle.setText(
-                                String.format(
-                                        Locale.UK,
-                                        "%s – %s (%d)",
-                                        r.getGuestName(),
-                                        r.getTime(),
-                                        r.getPartySize()
-                                )
-                        );
+                        tvTitle.setText(String.format(
+                                Locale.UK,
+                                "%s – %s (%d)",
+                                r.getGuestName(),
+                                r.getTime(),
+                                r.getPartySize()
+                        ));
 
                         tvSubtitle.setText("Date: " + r.getDate());
 
@@ -106,6 +123,20 @@ public class StaffReservationsActivity extends AppCompatActivity {
                         container.addView(card);
                     }
                 });
+    }
+
+    private void showAddReservationDialog() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("guestName", "Walk-in Guest");
+        data.put("date", "2025-01-01");
+        data.put("time", "18:00");
+        data.put("partySize", 2);
+        data.put("notes", "Added by staff");
+        data.put("completed", false);
+
+        db.collection("reservations")
+                .document(String.valueOf(System.currentTimeMillis()))
+                .set(data);
     }
 
     private void confirmDelete(String docId) {

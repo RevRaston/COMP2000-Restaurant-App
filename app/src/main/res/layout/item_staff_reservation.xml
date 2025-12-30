@@ -31,13 +31,14 @@
 
             <TextView
                 android:id="@+id/tvCompletedBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="COMPLETED"
-                android:textSize="12sp"
+                android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:background="@color/purple_secondary"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:visibility="gone"/>
+                android:backgroundTint="@color/purple_primary"
+                android:padding="6dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView

@@ -17,12 +17,16 @@ public class StaffDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_staff_dashboard);
 
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-        MaterialButton btnManageReservations = findViewById(R.id.btnManageReservations);
+        MaterialButton btnManageReservations =
+                findViewById(R.id.btnManageReservations);
 
+        // ✅ Safe ONLY if toolbar exists in XML
         toolbar.setNavigationOnClickListener(v -> finish());
 
         btnManageReservations.setOnClickListener(v ->
-                startActivity(new Intent(this, StaffReservationsActivity.class))
+                startActivity(
+                        new Intent(this, StaffReservationsActivity.class)
+                )
         );
     }
 }
