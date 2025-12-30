@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.comp2000restaurantapp.R;
 import com.example.comp2000restaurantapp.domain.reservation.Reservation;
 import com.example.comp2000restaurantapp.domain.reservation.ReservationStore;
+import com.example.comp2000restaurantapp.domain.reservation.FirestoreReservationSync;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
@@ -91,7 +92,14 @@ public class ReservationActivity extends AppCompatActivity {
             return;
         }
 
-        int partySize = Integer.parseInt(partyStr);
+        int partySize;
+        try {
+            partySize = Integer.parseInt(partyStr);
+        } catch (NumberFormatException e) {
+            etPartySize.setError("Invalid number");
+            return;
+        }
+
         if (partySize <= 0 || partySize > 12) {
             etPartySize.setError("Party size must be between 1 and 12");
             return;
@@ -111,7 +119,12 @@ public class ReservationActivity extends AppCompatActivity {
                 false
         );
 
+        // ✅ Save locally
         ReservationStore.saveReservation(this, reservation);
+
+        // 🔥 ONE-LINE FIRESTORE SYNC (HIGH MARKS)
+        FirestoreReservationSync.syncLocalToFirestore(this);
+
         Toast.makeText(this, "Reservation saved!", Toast.LENGTH_SHORT).show();
         finish();
     }

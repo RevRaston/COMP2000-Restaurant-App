@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
+    <!-- Top App Bar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
@@ -15,10 +16,20 @@
         app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
         app:elevation="4dp"/>
 
+    <!-- Subtitle -->
+    <TextView
+        android:layout_marginTop="16dp"
+        android:text="Live reservation list"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- List -->
     <ScrollView
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="12dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/reservationContainer"
