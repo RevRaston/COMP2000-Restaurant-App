@@ -16,43 +16,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <!-- Primary Reservations Entry -->
+    <!-- 🔹 Primary action -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnReservations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:minHeight="56dp"
+        android:layout_marginBottom="6dp"
         android:text="View My Reservations"
-        android:icon="@android:drawable/ic_menu_my_calendar"
+        app:icon="@android:drawable/ic_menu_my_calendar"
         app:iconPadding="12dp"/>
 
     <TextView
         android:text="View, edit or cancel your bookings"
         android:textSize="12sp"
         android:textColor="@android:color/darker_gray"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <!-- Secondary Actions -->
+    <!-- Secondary actions -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginBottom="12dp"
-        android:text="Browse Menu"/>
+        android:text="Browse Menu" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginBottom="12dp"
-        android:text="Settings"/>
+        android:text="Settings" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"/>
+        android:minHeight="48dp"
+        android:text="Logout" />
 
 </LinearLayout>

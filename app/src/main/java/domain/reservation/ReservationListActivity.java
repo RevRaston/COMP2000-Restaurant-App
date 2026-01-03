@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Paint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,6 +57,30 @@ public class ReservationListActivity extends AppCompatActivity {
             TextView tvTitle = item.findViewById(R.id.tvTitle);
             TextView tvSubtitle = item.findViewById(R.id.tvSubtitle);
             TextView tvNotes = item.findViewById(R.id.tvNotes);
+            TextView badge = item.findViewById(R.id.tvCompletedBadge);
+
+            tvTitle.setText(
+                    String.format(Locale.UK, "%s – %s (%d people)",
+                            r.getGuestName(), r.getTime(), r.getPartySize())
+            );
+            tvSubtitle.setText("Date: " + r.getDate());
+
+            if (r.getNotes() == null || r.getNotes().trim().isEmpty()) {
+                tvNotes.setVisibility(View.GONE);
+            } else {
+                tvNotes.setText("Notes: " + r.getNotes());
+                tvNotes.setVisibility(View.VISIBLE);
+            }
+
+            /* 🔹 Visual feedback for completed reservations */
+            if (r.isCompleted()) {
+                tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                tvTitle.setAlpha(0.4f);
+                tvSubtitle.setAlpha(0.4f);
+                tvNotes.setAlpha(0.4f);
+                badge.setVisibility(View.VISIBLE);
+            }
+
 
             tvTitle.setText(
                     String.format(Locale.UK, "%s – %s (%d people)",

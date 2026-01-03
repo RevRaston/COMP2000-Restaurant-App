@@ -31,14 +31,14 @@
 
             <TextView
                 android:id="@+id/tvCompletedBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="COMPLETED"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:backgroundTint="@color/purple_primary"
                 android:padding="6dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <TextView
@@ -48,9 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <!-- Action buttons -->
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -58,18 +59,20 @@
                 android:id="@+id/btnComplete"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="Mark complete"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Mark complete"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDelete"
-                android:layout_marginStart="8dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginStart="12dp"
                 android:text="Delete"
                 android:backgroundTint="@android:color/holo_red_dark"
-                android:textColor="@android:color/white"
-                android:layout_height="wrap_content"/>
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
     </LinearLayout>

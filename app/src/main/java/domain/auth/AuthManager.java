@@ -23,10 +23,12 @@ public class AuthManager {
     }
 
     public static boolean isStaff() {
-        return currentUser != null && "staff".equalsIgnoreCase(currentUser.getRole());
+        return currentUser != null &&
+                "staff".equalsIgnoreCase(currentUser.getRole());
     }
 
     public static boolean isGuest() {
-        return currentUser != null && "guest".equalsIgnoreCase(currentUser.getRole());
+        return currentUser != null &&
+                "guest".equalsIgnoreCase(currentUser.getRole());
     }
 }

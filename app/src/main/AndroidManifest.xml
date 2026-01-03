@@ -67,6 +67,11 @@
         <!-- Staff reservations management -->
         <activity
             android:name="com.example.comp2000restaurantapp.ui.staff.StaffReservationsActivity" />
+        <!-- Gues Splash screen -->
+        <activity
+            android:name="com.example.comp2000restaurantapp.ui.auth.GuestSplashActivity"
+            android:exported="false" />
+
 
 
     </application>
