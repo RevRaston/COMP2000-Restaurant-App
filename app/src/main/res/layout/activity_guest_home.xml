@@ -1,43 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:padding="24dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:text="GUEST HOME"
+        android:text="Guest Home"
         android:textSize="24sp"
-        android:layout_marginBottom="24dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!-- Primary Reservations Entry -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReservations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="View My Reservations"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        app:iconPadding="12dp"/>
+
+    <TextView
+        android:text="View, edit or cancel your bookings"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Secondary Actions -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="Menu" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnReservations"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Reservations" />
+        android:text="Browse Menu"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="Settings" />
+        android:text="Settings"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout" />
+        android:text="Logout"/>
 
 </LinearLayout>

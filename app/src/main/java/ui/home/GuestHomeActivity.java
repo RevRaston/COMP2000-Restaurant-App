@@ -25,17 +25,28 @@ public class GuestHomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_guest_home);
 
-        findViewById(R.id.btnMenu)
-                .setOnClickListener(v ->
-                        startActivity(new Intent(this, MenuActivity.class)));
-
+        // 🔹 Primary: Reservations
         findViewById(R.id.btnReservations)
                 .setOnClickListener(v ->
-                        startActivity(new Intent(this, ReservationActivity.class)));
+                        startActivity(
+                                new Intent(this, ReservationActivity.class)
+                        )
+                );
+
+        // Secondary actions
+        findViewById(R.id.btnMenu)
+                .setOnClickListener(v ->
+                        startActivity(
+                                new Intent(this, MenuActivity.class)
+                        )
+                );
 
         findViewById(R.id.btnSettings)
                 .setOnClickListener(v ->
-                        startActivity(new Intent(this, SettingsActivity.class)));
+                        startActivity(
+                                new Intent(this, SettingsActivity.class)
+                        )
+                );
 
         findViewById(R.id.btnLogout)
                 .setOnClickListener(v -> {
